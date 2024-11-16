@@ -50,6 +50,13 @@ REFERENCE_IDENTIFIERS = {
     }
 }
 
+FILE_EXTENSION_LANGUAGE_MAP = {
+    # ".java": LanguageEnum.JAVA,
+    ".py": LanguageEnum.PYTHON,
+    # ".js": LanguageEnum.JAVASCRIPT,
+    # ".rs": LanguageEnum.RUST,
+    # Add other extensions and languages as needed
+}
 
 def download_codebase(git_url, username, token):
     if username and token:
@@ -66,8 +73,21 @@ def download_codebase(git_url, username, token):
     return f'{INPUT_DIR}/{repo_name}'
 
 
-def get_files(codebase_path):
+def get_language_from_extension(file_ext):
     pass
+
+
+def get_files(fp):
+    files_list = []
+    for root, dirs, files in os.walk(fp):
+        dirs[:] = [d for d in dirs if d not in BLACKLIST_DIR]
+        for file in files:
+            file_ext = os.path.splitext(file)[1]
+            if file_ext in WHITELIST_FILES:
+                if file not in BLACKLIST_FILES:
+                    file_path = os.path.join(root, file)
+                    lang = get_language_from_extension(file_ext)
+                    
 
 
 def parse_code_files(files):
@@ -112,6 +132,8 @@ if __name__ == '__main__':
     # codebase_path = download_codebase(url, username, token)
 
     codebase_path = f'{INPUT_DIR}/mypy'
+    files = get_files(codebase_path)
+
 
 
 
