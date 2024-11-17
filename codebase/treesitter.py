@@ -137,7 +137,7 @@ class Treesitter(ABC):
         return doc_comment.strip()
 
     def _is_descendant_of(self, method_node, class_node):
-        """checks if method node is an ddscendant of class_node"""
+        """checks if method node is an descendant of class_node"""
         current = method_node.parent
         while current:
             if current == class_node: return True
