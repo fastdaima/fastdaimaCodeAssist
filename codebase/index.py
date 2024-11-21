@@ -1,5 +1,6 @@
 # /usr/bin/python
 import os
+import json
 from pprint import pprint
 import sys
 from collections import defaultdict
@@ -214,7 +215,17 @@ def map_references(references, class_data_map, method_data_map):
 def save_data_to_file(repo_name, class_map, method_map):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(f'{OUTPUT_DIR}/{repo_name}', exist_ok=True)
+    output_fp = f'{OUTPUT_DIR}/{repo_name}/data.json'
+    data = {
+        'class': list(class_map.values()),
+        'method': list(method_map.values())
+    }
 
+    with open(output_fp, 'w+') as f:
+        f.dump(data, f)
+    return output_fp
+
+    # [TODO]
     method_fp = f'{OUTPUT_DIR}/{repo_name}/methods.csv'
     class_fp = f'{OUTPUT_DIR}/{repo_name}/classes.csv'
 
@@ -274,4 +285,8 @@ def index_codebase(git_url, username, token):
     token = input('Enter git token')
     '''
     db_paths = return_db_data(git_url, username, token)
+
+    db_paths = ['/home/srk/Desktop/projects/fastdaimaCodeAssist/output/mypy/classes.csv', '/home/srk/Desktop/projects/fastdaimaCodeAssist/output/mypy/methods.csv']
+
+
     
