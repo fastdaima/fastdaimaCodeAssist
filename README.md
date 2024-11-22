@@ -25,3 +25,4 @@
 - https://blog.lancedb.com/rag-codebase-1/
 - https://github.com/Aider-AI/aider
 - https://github.com/mufeedvh/code2prompt
+- [what is a treesitter?](https://www.youtube.com/watch?v=09-9LltqWLY)
