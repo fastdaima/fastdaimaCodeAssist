@@ -13,16 +13,32 @@
 
 ## Feature set
 
-- [] repository map generation like in aider-chat  
-- [] tree map parser implementation for chunking
-- [] generating overall file structure in an md / text file
-- [] initial language support for python language
-- [] indexing codebases into sqlite-vec along with metadata
-- [] 
+### completed:
+- tree map parser implementation for chunking
+- initial language support for python language
+- adding gguf embeddings support
+- huggingface model download script
+
+### work in progress: 
+- adding support to lancedb
+- repository map generation like in aider-chat
+- indexing codebases into sqlite-vec along with metadata
+- generating overall file structure in an md / text file
+- adding support to mordernbert embedding model
+- adding support to ragatouile library
+- adding support to zig, rust, c, c++ languages
+- implementing treesitter library 
+- adding support to pgvector
+- adding support to OpenAI embeddings and huggingface embeddings models 
 
 
 # Heavy References: 
 - https://blog.lancedb.com/rag-codebase-1/
 - https://github.com/Aider-AI/aider
 - https://github.com/mufeedvh/code2prompt
-- [what is a treesitter?](https://www.youtube.com/watch?v=09-9LltqWLY)
+
+
+# Installing llama-python-package 
+```
+CMAKE_ARGS="-DGGML_CUDA=on -DLLAVA_BUILD=off" pip install llama-cpp-python --upgrade --force-reinstall
+```
