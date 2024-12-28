@@ -13,7 +13,7 @@
 
 ## Feature set
 
-- [] repository map generation 
+- [] repository map generation like in aider-chat  
 - [] tree map parser implementation for chunking
 - [] generating overall file structure in an md / text file
 - [] initial language support for python language
