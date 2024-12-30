@@ -10,6 +10,7 @@ dependencies = [
     "llm>=0.19.1",
     "numpy>=2.1.3",
     "pandas>=2.2.3",
+    "python-dotenv>=1.0.1",
     "tiktoken>=0.8.0",
     "torch>=2.5.1",
     "transformers>=4.46.3",

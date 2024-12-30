@@ -9,6 +9,8 @@ from itertools import islice
 import numpy as np
 from llama_cpp import Llama
 
+from codebase.utils import weak_lru
+
 
 
 # use https://huggingface.co/nvidia/NV-Embed-v2 model for creating embeddings
@@ -18,7 +20,8 @@ class EmbeddingModel(ABC):
     """
     Embeddings model base class, embed a batch of strings or bytes, which returns a list of floats 
     """
-    model_id: str 
+    model_id: str
+    model_path: str 
     key: Optional[str] = None 
     needs_key: Optional[str] = None 
     key_env_var: Optional[str] = None 
@@ -58,15 +61,17 @@ class EmbeddingModel(ABC):
 
 
 class GGufEmbeddings(EmbeddingModel):
-    def __init__(self, model_id, model_path): 
+    def __init__(self, model_path, model_id=None): 
         self.model_id = model_id 
         self.model_path = model_path 
-        self._model = None 
+        self._model = self._get_model()
     
     def embed_batch(self, texts):
-        if self._model is None: 
-            self._model = Llama(
-                model_path = self.model_path, embedding=True, verbose=False 
-            )
         results = self._model.create_embedding(texts)
         return [result['embedding'] for result in results['data']]
+
+    @weak_lru(maxsize=1)
+    def _get_model(self):
+        return Llama(
+            model_path = self.model_path, embedding=True, verbose=False 
+        )
